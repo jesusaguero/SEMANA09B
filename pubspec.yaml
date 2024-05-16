@@ -63,6 +63,7 @@ flutter:
     - assets/alimentos/
     - assets/animales/
     - assets/lugares/
+    - assets/
 
   fonts:
     - family: Lato

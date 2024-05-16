@@ -26,11 +26,11 @@ class ImageGallery extends StatelessWidget {
         crossAxisCount: 2,
         children: [
           ImageCard(
-            imagePath: 'assets/alimentos/platano.jpeg',
+            imagePath: 'assets/lugares/selva.jpg',
             fontFamily: 'Arial',
           ),
           ImageCard(
-            imagePath: 'assets/animales/mono.jpg',
+            imagePath: 'assets/lugares/selva.jpg',
             fontFamily: 'Times New Roman',
           ),
           ImageCard(
