@@ -1,4 +1,6 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,60 +10,78 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Lista de Elementos'),
-        ),
-        body: ListView(
-          children: [
-            ListItem(
-              imagePath: 'assets/images/alimentos/platano.jpeg',
-              text: 'Plátano',
-              font: 'OpenSans',
-            ),
-            ListItem(
-              imagePath: 'assets/images/animales/mono.jpg',
-              text: 'Mono',
-              font: 'Lato',
-            ),
-            ListItem(
-              imagePath: 'assets/lugares/selva.jpeg',
-              text: 'Selva Peruana',
-              font: 'Ubuntu',
-            ),
-          ],
-        ),
+      home: ImageGallery(),
+    );
+  }
+}
+
+class ImageGallery extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Galería de Imágenes'),
+      ),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: [
+          ImageCard(
+            imagePath: 'assets/alimentos/platano.jpeg',
+            fontFamily: 'Arial',
+          ),
+          ImageCard(
+            imagePath: 'assets/animales/mono.jpg',
+            fontFamily: 'Times New Roman',
+          ),
+          ImageCard(
+            imagePath: 'assets/images/image3.svg',
+            fontFamily: 'Roboto',
+            isSvg: true,
+          ),
+        ],
       ),
     );
   }
 }
 
-class ListItem extends StatelessWidget {
+class ImageCard extends StatelessWidget {
   final String imagePath;
-  final String text;
-  final String font;
+  final String fontFamily;
+  final bool isSvg;
 
-  const ListItem({
+  const ImageCard({
     required this.imagePath,
-    required this.text,
-    required this.font,
+    required this.fontFamily,
+    this.isSvg = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Image.asset(
-        imagePath,
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-      ),
-      title: Text(
-        text,
-        style: TextStyle(
-          fontFamily: font,
-          fontSize: 20,
-        ),
+    return Card(
+      child: Column(
+        children: [
+          Expanded(
+            child: isSvg
+                ? SvgPicture.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
+                  ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Imagen Top',
+              style: TextStyle(
+                fontFamily: fontFamily,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
